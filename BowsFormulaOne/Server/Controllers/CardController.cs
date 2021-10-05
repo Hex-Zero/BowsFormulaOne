@@ -12,51 +12,47 @@ namespace BowsFormulaOne.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class CardController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public UserController(DataContext context)
+        public CardController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/User
+        // GET: api/Card
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<CardDto>>> GetCardDto()
         {
-            return await _context.Users
-                .Include(u => u.PhoneNumbers)
-                .Include(u => u.Emails)
-                .Include(u => u.Cards)
-                .ToListAsync();
+            return await _context.CardDto.ToListAsync();
         }
 
-        // GET: api/User/5
+        // GET: api/Card/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUserDto(int id)
+        public async Task<ActionResult<CardDto>> GetCardDto(int id)
         {
-            var userDto = await _context.Users.FindAsync(id);
+            var cardDto = await _context.CardDto.FindAsync(id);
 
-            if (userDto == null)
+            if (cardDto == null)
             {
                 return NotFound();
             }
 
-            return userDto;
+            return cardDto;
         }
 
-        // PUT: api/User/5
+        // PUT: api/Card/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserDto(int id, UserDto userDto)
+        public async Task<IActionResult> PutCardDto(int id, CardDto cardDto)
         {
-            if (id != userDto.Id)
+            if (id != cardDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(userDto).State = EntityState.Modified;
+            _context.Entry(cardDto).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +60,7 @@ namespace BowsFormulaOne.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserDtoExists(id))
+                if (!CardDtoExists(id))
                 {
                     return NotFound();
                 }
@@ -77,36 +73,36 @@ namespace BowsFormulaOne.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/User
+        // POST: api/Card
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserDto>> PostUserDto(UserDto userDto)
+        public async Task<ActionResult<CardDto>> PostCardDto(CardDto cardDto)
         {
-            _context.Users.Add(userDto);
+            _context.CardDto.Add(cardDto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserDto", new { id = userDto.Id }, userDto);
+            return CreatedAtAction("GetCardDto", new { id = cardDto.Id }, cardDto);
         }
 
-        // DELETE: api/User/5
+        // DELETE: api/Card/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserDto(int id)
+        public async Task<IActionResult> DeleteCardDto(int id)
         {
-            var userDto = await _context.Users.FindAsync(id);
-            if (userDto == null)
+            var cardDto = await _context.CardDto.FindAsync(id);
+            if (cardDto == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(userDto);
+            _context.CardDto.Remove(cardDto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserDtoExists(int id)
+        private bool CardDtoExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.CardDto.Any(e => e.Id == id);
         }
     }
 }

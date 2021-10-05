@@ -13,5 +13,7 @@ namespace BowsFormulaOneAPI.Data.Models
         public DateTime ModifiedDate { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
         public virtual ICollection<PhoneNumberDto> PhoneNumbers { get; set; }
+        public virtual ICollection<EmailDto> Emails { get; set; }
+        public virtual ICollection<CardDto> Cards { get; set; }
     }
 }
