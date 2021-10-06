@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using BowsFormulaOne.Server.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -57,12 +60,30 @@ namespace BowsFormulaOne.Server.Controllers
         {
             var newId = "";
 
-            if (newUser.CardNumber != null)
+            try {
+               var address = new MailAddress(newUser.Email).Address;
+            } catch(FormatException) {
+                return NotFound("Invalid Email Address");
+            }
+
+            if (!_validators.IsValidUkPhoneNumber(newUser.PhoneNumber))
             {
-                if (await IsUniqueCardNumber(newUser.CardNumber))
+                return NotFound("Invalid Phone Number");
+            }
+
+            if (!String.IsNullOrEmpty(newUser.CardNumber))
+            {
+                if (!_validators.IsValidCardNumber(newUser.CardNumber))
+                {
+                    return NotFound("Card Number is invalid");
+                }
+
+                if (!(await IsUniqueCardNumber(newUser.CardNumber)))
                 {
                     return NotFound("Card number is not unique");
                 }
+
+                newId = newUser.CardNumber;
             }
             else
             {
@@ -72,18 +93,42 @@ namespace BowsFormulaOne.Server.Controllers
                     newId = _keyGenerator.GetUniqueKey(16);
                     isUniqueId = await IsUniqueCardNumber(newId);
                 }
-
             }
 
-
-            return NotFound(newId);
-
+            var addUser = new UserDto
+            {
+                EmployeeNumber = newUser.EmployeeNumber,
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName,
+            };
+            await _context.Users.AddAsync(addUser);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            var addEmail = new EmailDto
+            {
+                EmailAddress = newUser.Email,
+                UserDtoId = addUser.Id,
+            };
+            await _context.Emails.AddAsync(addEmail);
+
+            var addPhoneNumber = new PhoneNumberDto
+            {
+                PhoneNumber = newUser.PhoneNumber,
+                UserDtoId = addUser.Id
+            };
+            await _context.PhoneNumbers.AddAsync(addPhoneNumber);
+
+            var addCard = new CardDto
+            {
+                CardNumber = newId,
+                PinCode = newUser.PinCode,
+                UserDtoId = addUser.Id,
+            };
+            await _context.CardDto.AddAsync(addCard);
+            await _context.SaveChangesAsync();
+
+            return addCard;
         }
-
-
     }
 
 }

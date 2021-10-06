@@ -37,6 +37,7 @@ namespace BowsFormulaOneAPI.Data
 
         public DbSet<UserDto> Users { get; set; }
         public DbSet<PhoneNumberDto> PhoneNumbers { get; set; }
-        public DbSet<BowsFormulaOneAPI.Data.Models.CardDto> CardDto { get; set; }
+        public DbSet<EmailDto> Emails { get; set; }
+        public DbSet<CardDto> CardDto { get; set; }
     }
 }
