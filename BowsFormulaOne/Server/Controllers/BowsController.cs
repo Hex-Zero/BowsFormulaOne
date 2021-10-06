@@ -45,8 +45,11 @@ namespace BowsFormulaOne.Server.Controllers
             {
                 return NotFound("No Card User Found. Please add a new card user.");
             }
-            cardDto.PinCode = _encryption.DecryptString(cardDto.PinCode);
 
+            if (!_validators.IsValidPinCode(cardDto.PinCode))
+            {
+                cardDto.PinCode = _encryption.DecryptString(cardDto.PinCode);
+            }
 
             var cardUser = await _context.Users
                 .Include(u => u.Emails)

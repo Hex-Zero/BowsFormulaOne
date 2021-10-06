@@ -14,7 +14,9 @@ namespace BowsFormulaOneAPI.Data.Models
         public string Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        [Required]
         public string PinCode { get; set; }
+        [Required]
         public string CardNumber { get; set; }
     }
 }
