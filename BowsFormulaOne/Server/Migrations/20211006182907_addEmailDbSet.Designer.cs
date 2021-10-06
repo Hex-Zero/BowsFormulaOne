@@ -3,14 +3,16 @@ using System;
 using BowsFormulaOneAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BowsFormulaOne.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211006182907_addEmailDbSet")]
+    partial class addEmailDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,10 +55,10 @@ namespace BowsFormulaOne.Server.Migrations
                         new
                         {
                             Id = 1,
-                            CardLockedTill = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(9444),
+                            CardLockedTill = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3097),
                             CardNumber = "r7jTG8dqBy5wGO4L",
-                            CreatedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(9433),
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(9442),
+                            CreatedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3085),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3094),
                             PinAttempts = (sbyte)0,
                             PinCode = 1000,
                             UserDtoId = 1
@@ -64,10 +66,10 @@ namespace BowsFormulaOne.Server.Migrations
                         new
                         {
                             Id = 2,
-                            CardLockedTill = new DateTime(2021, 10, 6, 22, 47, 49, 331, DateTimeKind.Local).AddTicks(62),
+                            CardLockedTill = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3702),
                             CardNumber = "r7jTG83qBy5wGO4L",
-                            CreatedDate = new DateTime(2021, 10, 6, 22, 47, 49, 331, DateTimeKind.Local).AddTicks(52),
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 331, DateTimeKind.Local).AddTicks(59),
+                            CreatedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3692),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(3700),
                             PinAttempts = (sbyte)0,
                             PinCode = 1200,
                             UserDtoId = 2
@@ -104,7 +106,7 @@ namespace BowsFormulaOne.Server.Migrations
                             Id = 1,
                             EmailAddress = "Hex@live.com",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(7971),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(1842),
                             UserDtoId = 1
                         },
                         new
@@ -112,7 +114,7 @@ namespace BowsFormulaOne.Server.Migrations
                             Id = 3,
                             EmailAddress = "Hexzero@gmail.com",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(8717),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(2413),
                             UserDtoId = 1
                         },
                         new
@@ -120,7 +122,7 @@ namespace BowsFormulaOne.Server.Migrations
                             Id = 4,
                             EmailAddress = "Hex@live.co.uk",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(8725),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(2421),
                             UserDtoId = 1
                         },
                         new
@@ -128,7 +130,7 @@ namespace BowsFormulaOne.Server.Migrations
                             Id = 2,
                             EmailAddress = "Alex@gmail.com",
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(8728),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(2424),
                             UserDtoId = 2
                         });
                 });
@@ -162,7 +164,7 @@ namespace BowsFormulaOne.Server.Migrations
                         {
                             Id = 1,
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(6828),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(684),
                             PhoneNumber = "07667587200",
                             UserDtoId = 1
                         },
@@ -170,7 +172,7 @@ namespace BowsFormulaOne.Server.Migrations
                         {
                             Id = 3,
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(7349),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(1214),
                             PhoneNumber = "07667986200",
                             UserDtoId = 1
                         },
@@ -178,7 +180,7 @@ namespace BowsFormulaOne.Server.Migrations
                         {
                             Id = 4,
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(7357),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(1222),
                             PhoneNumber = "07667987206",
                             UserDtoId = 1
                         },
@@ -186,7 +188,7 @@ namespace BowsFormulaOne.Server.Migrations
                         {
                             Id = 2,
                             IsDeleted = false,
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 330, DateTimeKind.Local).AddTicks(7360),
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 898, DateTimeKind.Local).AddTicks(1225),
                             PhoneNumber = "07662987201",
                             UserDtoId = 2
                         });
@@ -224,32 +226,34 @@ namespace BowsFormulaOne.Server.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 10, 6, 22, 47, 49, 328, DateTimeKind.Local).AddTicks(1971),
+                            CreatedDate = new DateTime(2021, 10, 6, 19, 29, 6, 895, DateTimeKind.Local).AddTicks(5141),
                             EmployeeNumber = "Es553",
                             FirstName = "Maxwell",
                             IsDeleted = false,
                             LastName = "Archer",
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 329, DateTimeKind.Local).AddTicks(8468)
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 897, DateTimeKind.Local).AddTicks(2271)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 10, 6, 22, 47, 49, 329, DateTimeKind.Local).AddTicks(9463),
+                            CreatedDate = new DateTime(2021, 10, 6, 19, 29, 6, 897, DateTimeKind.Local).AddTicks(3174),
                             EmployeeNumber = "r7jTG8dqBy5wGO4L",
                             FirstName = "Alexandra",
                             IsDeleted = false,
                             LastName = "Archer",
-                            ModifiedDate = new DateTime(2021, 10, 6, 22, 47, 49, 329, DateTimeKind.Local).AddTicks(9472)
+                            ModifiedDate = new DateTime(2021, 10, 6, 19, 29, 6, 897, DateTimeKind.Local).AddTicks(3184)
                         });
                 });
 
             modelBuilder.Entity("BowsFormulaOneAPI.Data.Models.CardDto", b =>
                 {
-                    b.HasOne("BowsFormulaOneAPI.Data.Models.UserDto", null)
+                    b.HasOne("BowsFormulaOneAPI.Data.Models.UserDto", "CardUser")
                         .WithMany("Cards")
                         .HasForeignKey("UserDtoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CardUser");
                 });
 
             modelBuilder.Entity("BowsFormulaOneAPI.Data.Models.EmailDto", b =>

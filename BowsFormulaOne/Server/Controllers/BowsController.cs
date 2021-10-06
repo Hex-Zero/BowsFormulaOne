@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using BowsFormulaOne.Server.Helpers;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BowsFormulaOneAPI.Data;
 using BowsFormulaOneAPI.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BowsFormulaOne.Server.Controllers
 {
@@ -29,7 +30,7 @@ namespace BowsFormulaOne.Server.Controllers
 
         //GET: api/Bows/43kjfkdsfui343jk
         [HttpGet("{cardNumber}")]
-        public async Task<ActionResult<CardDto>> GetCardDto(string cardNumber)
+        public async Task<ActionResult<UserDto>> GetCardUserDto(string cardNumber)
         {
 
             if (!_validators.IsValidCardNumber(cardNumber))
@@ -43,11 +44,12 @@ namespace BowsFormulaOne.Server.Controllers
                 return NotFound("No card Found. Please add a new card user.");
             }
 
-            var cardUser = await _context.Users.FirstOrDefaultAsync(u => u.Id.Equals(cardDto.UserDtoId));
+            var cardUser = await _context.Users
+                .Include(u => u.Emails)
+                .Include(u => u.PhoneNumbers)
+                .FirstOrDefaultAsync(u => u.Id.Equals(cardDto.UserDtoId));
 
-            cardDto.CardUser = cardUser;
-
-            return cardDto;
+            return cardUser;
         }
 
         private async Task<bool> IsUniqueCardNumber(string cardNumber)
@@ -56,7 +58,7 @@ namespace BowsFormulaOne.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CardDto>> PostCardDto(CreateNewUserModel newUser)
+        public async Task<ActionResult<UserDto>> PostCardDto(CreateNewUserModel newUser)
         {
             var newId = "";
 
@@ -127,7 +129,7 @@ namespace BowsFormulaOne.Server.Controllers
             await _context.CardDto.AddAsync(addCard);
             await _context.SaveChangesAsync();
 
-            return addCard;
+            return addUser;
         }
     }
 
