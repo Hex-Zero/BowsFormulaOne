@@ -29,6 +29,7 @@ namespace BowsFormulaOne.Server
             services.AddSwaggerGen();
             services.AddScoped<IValidators, Validators>();
             services.AddScoped<IKeyGenerator, KeyGenerator>();
+            services.AddScoped<IEncryption, Encryption>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

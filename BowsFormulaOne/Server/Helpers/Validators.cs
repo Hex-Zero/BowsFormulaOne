@@ -8,6 +8,7 @@ namespace BowsFormulaOne.Server.Helpers
     {
         public bool IsValidCardNumber(string cardNumber);
         public bool IsValidUkPhoneNumber(string phoneNumber);
+        public bool IsValidPinCode(string pinCode);
     }
 
     public class Validators : IValidators
@@ -22,6 +23,12 @@ namespace BowsFormulaOne.Server.Helpers
         {
             var regex = new Regex(@"^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}");
             return regex.IsMatch(phoneNumber);
+        }
+
+        public bool IsValidPinCode(string pinCode)
+        {
+            var regex = new Regex(@"^[0-9]{4,4}$");
+            return regex.IsMatch(pinCode);
         }
     }
 }
