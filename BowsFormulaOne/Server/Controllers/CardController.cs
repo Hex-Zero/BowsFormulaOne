@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BowsFormulaOne.Server.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,9 @@ using BowsFormulaOneAPI.Data.Models;
 
 namespace BowsFormulaOne.Server.Controllers
 {
+    // This controller can be removed if NOT in use
+    // To enable the API key protection uncomment the below line and set the API Key in appsettings.json file
+    // [ApiKey]
     [Route("api/[controller]")]
     [ApiController]
     public class CardController : ControllerBase

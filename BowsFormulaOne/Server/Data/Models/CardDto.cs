@@ -14,5 +14,6 @@ namespace BowsFormulaOneAPI.Data.Models
         public int PinCode { get; set; }
         public sbyte PinAttempts { get; set; } = 0;
         public DateTime CardLockedTill { get; set; } = DateTime.Now;
+        public virtual UserDto CardUser { get; set; }
     }
 }

@@ -1,11 +1,9 @@
+using BowsFormulaOne.Server.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using BowsFormulaOneAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +27,8 @@ namespace BowsFormulaOne.Server
             services.AddRazorPages();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen();
+            services.AddScoped<IValidators, Validators>();
+            services.AddScoped<IKeyGenerator, KeyGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +49,7 @@ namespace BowsFormulaOne.Server
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bows Formula One API V1");
             });
 
             app.UseHttpsRedirection();
