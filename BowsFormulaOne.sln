@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowsFormulaOne.Client", "Bo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowsFormulaOne.Shared", "BowsFormulaOne\Shared\BowsFormulaOne.Shared.csproj", "{56F7B386-24AF-4AD1-BEEA-C5D66BE6A0F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{58C21545-6159-4D15-8DDF-70805BE23011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{56F7B386-24AF-4AD1-BEEA-C5D66BE6A0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F7B386-24AF-4AD1-BEEA-C5D66BE6A0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F7B386-24AF-4AD1-BEEA-C5D66BE6A0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C21545-6159-4D15-8DDF-70805BE23011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C21545-6159-4D15-8DDF-70805BE23011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C21545-6159-4D15-8DDF-70805BE23011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C21545-6159-4D15-8DDF-70805BE23011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
