@@ -12,16 +12,21 @@ namespace BowsFormulaOne.Server.Helpers
         public string DecryptString(string cipherText);
     }
 
-
     public class Encryption : IEncryption
     {
+        private readonly IConfiguration _configuration;
+
+        public Encryption(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         // This encrypting is only to prevent database leak
-        private string keyString = "E546C8DF278CD5931069B522E695D4F2";
+
 
         public string EncryptString(string text)
         {
 
-            var key = Encoding.UTF8.GetBytes(keyString);
+            var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Salt"));
 
             using (var aesAlg = Aes.Create())
             {
@@ -59,7 +64,7 @@ namespace BowsFormulaOne.Server.Helpers
 
             Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
             Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            var key = Encoding.UTF8.GetBytes(keyString);
+            var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Salt"));
 
             using (var aesAlg = Aes.Create())
             {

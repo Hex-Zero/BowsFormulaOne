@@ -22,7 +22,7 @@ namespace BowsFormulaOne.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));

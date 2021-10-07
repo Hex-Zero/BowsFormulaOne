@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 
 namespace BowsFormulaOneAPI.Data.Models
 {
@@ -16,5 +17,7 @@ namespace BowsFormulaOneAPI.Data.Models
         public string PinCode { get; set; }
         public sbyte PinAttempts { get; set; } = 0;
         public DateTime CardLockedTill { get; set; } = DateTime.Now;
+        [Column(TypeName="money")]
+        public Decimal Balance { get; set; } = 0;
     }
 }

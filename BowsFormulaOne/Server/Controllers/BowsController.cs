@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using BowsFormulaOne.Server.Helpers;
@@ -7,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using BowsFormulaOneAPI.Data;
 using BowsFormulaOneAPI.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace BowsFormulaOne.Server.Controllers
 {

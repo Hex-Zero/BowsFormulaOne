@@ -30,8 +30,8 @@ namespace BowsFormulaOneAPI.Data
             );
 
             modelBuilder.Entity<CardDto>().HasData(
-                new CardDto{ Id = 1, UserDtoId = 1, CardNumber = "r7jTG8dqBy5wGO4L", PinCode = "1000",},
-                new CardDto{ Id = 2, UserDtoId = 2, CardNumber = "r7jTG83qBy5wGO4L", PinCode = "1200",}
+                new CardDto{ Id = 1, UserDtoId = 1, CardNumber = "r7jTG8dqBy5wGO4L", PinCode = "1000", Balance = 10},
+                new CardDto{ Id = 2, UserDtoId = 2, CardNumber = "r7jTG83qBy5wGO4L", PinCode = "1200", Balance = 20}
             );
         }
 
