@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
+using BowsFormulaOne.Server.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +20,14 @@ namespace BowsFormulaOne.Server.Controllers
     public class UserController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IValidators _validators;
+        private readonly IEncryption _encryption;
 
-        public UserController(DataContext context)
+        public UserController(DataContext context, IValidators validators, IEncryption encryption)
         {
             _context = context;
+            _validators = validators;
+            _encryption = encryption;
         }
 
         // GET: api/User
@@ -39,11 +45,21 @@ namespace BowsFormulaOne.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserDto(int id)
         {
-            var userDto = await _context.Users.FindAsync(id);
+            var userDto = await _context.Users
+                .Include(u => u.PhoneNumbers)
+                .Include(u => u.Emails)
+                .Include(u => u.Cards).FirstOrDefaultAsync(u => u.Id == id);
 
             if (userDto == null)
             {
                 return NotFound();
+            }
+            foreach (var cardDto in userDto.Cards)
+            {
+                if (!_validators.IsValidPinCode(cardDto.PinCode))
+                {
+                    cardDto.PinCode = _encryption.DecryptString(cardDto.PinCode);
+                }
             }
 
             return userDto;
