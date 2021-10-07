@@ -28,7 +28,6 @@ namespace BowsFormulaOne.Server
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen();
             services.AddScoped<IValidators, Validators>();
-            services.AddScoped<IKeyGenerator, KeyGenerator>();
             services.AddScoped<IEncryption, Encryption>();
         }
 

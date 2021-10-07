@@ -19,14 +19,12 @@ namespace BowsFormulaOne.Server.Controllers
     {
         private readonly DataContext _context;
         private readonly IValidators _validators;
-        private readonly IKeyGenerator _keyGenerator;
         private readonly IEncryption _encryption;
 
-        public BowsController(DataContext context, IValidators validators, IKeyGenerator keyGenerator, IEncryption encryption)
+        public BowsController(DataContext context, IValidators validators, IEncryption encryption)
         {
             _context = context;
             _validators = validators;
-            _keyGenerator = keyGenerator;
             _encryption = encryption;
         }
 
@@ -67,8 +65,6 @@ namespace BowsFormulaOne.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDto>> PostCardDto(CreateNewUserModel newUser)
         {
-            var newId = "";
-
             try {
                var address = new MailAddress(newUser.Email).Address;
             } catch(FormatException) {
@@ -85,28 +81,14 @@ namespace BowsFormulaOne.Server.Controllers
                 return NotFound("Phone Number is Invalid");
             }
 
-            if (!String.IsNullOrEmpty(newUser.CardNumber))
+            if (!_validators.IsValidCardNumber(newUser.CardNumber))
             {
-                if (!_validators.IsValidCardNumber(newUser.CardNumber))
-                {
-                    return NotFound("Card Number is Invalid");
-                }
-
-                if (!(await IsUniqueCardNumber(newUser.CardNumber)))
-                {
-                    return NotFound("Card number is NOT Unique");
-                }
-
-                newId = newUser.CardNumber;
+                return NotFound("Card Number is Invalid");
             }
-            else
+
+            if (!(await IsUniqueCardNumber(newUser.CardNumber)))
             {
-                var isUniqueId = false;
-                while (!isUniqueId)
-                {
-                    newId = _keyGenerator.GetUniqueKey(16);
-                    isUniqueId = await IsUniqueCardNumber(newId);
-                }
+                return NotFound("Card number is NOT Unique");
             }
 
             var addUser = new UserDto
@@ -134,7 +116,7 @@ namespace BowsFormulaOne.Server.Controllers
 
             var addCard = new CardDto
             {
-                CardNumber = newId,
+                CardNumber = newUser.CardNumber,
                 PinCode = _encryption.EncryptString(newUser.PinCode),
                 UserDtoId = addUser.Id,
             };
